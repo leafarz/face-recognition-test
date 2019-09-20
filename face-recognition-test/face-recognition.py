@@ -16,7 +16,7 @@ if not os.path.exists('./data/train_data.yml'):
 face_recognizer = cv2.face.LBPHFaceRecognizer_create()
 face_recognizer.read('./data/train_data.yml')
 
-_, face_ids = frh.fetch_ids('./data/images')
+face_ids = frh.fetch_ids('./data/images')
 
 cap = cv2.VideoCapture(0)
 while cap.isOpened():
@@ -29,6 +29,10 @@ while cap.isOpened():
         roi_gray = gray[y:y+h, x:x+w]
         label, confidence = face_recognizer.predict(roi_gray)
         
+        if(label > len(face_ids)):
+            print('face_ids mismatch with index! Training data might be outdated.')
+            continue
+
         if confidence > CONFIDENCE_THRESHOLD:
             frh.draw_text(frame, face_ids[label] + ',' + "{:.2f}".format(confidence), x, y, (255,0,0))
 
