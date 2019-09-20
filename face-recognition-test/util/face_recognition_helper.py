@@ -8,13 +8,13 @@ def detect_faces(img):
     faces = face_cascade.detectMultiScale(gray, scaleFactor=1.1, minNeighbors=5)
     return gray, faces
 
-def draw_rectangle(img, faces):
+def draw_rectangle(img, face):
     channels = (255,) * img.shape[2] if len(img.shape) > 2 else 1
-    for (x,y,w,h) in faces:
-        cv2.rectangle(img, (x,y), (x+w, y+h), (255,0,0), 3)
+    x,y,w,h = face
+    cv2.rectangle(img, (x,y), (x+w, y+h), (255,0,0), 3)
 
 def draw_text(img, text, x, y, color):
-    cv2.putText(img, text, (x,y), cv2.FONT_HERSHEY_SIMPLEX, 2, color, 3)
+    cv2.putText(img, text, (x,y), cv2.FONT_HERSHEY_SIMPLEX, 1, color, 2)
 
 def fetch_data(root_directory):
     curr_id = 0

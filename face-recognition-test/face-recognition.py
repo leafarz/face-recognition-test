@@ -33,8 +33,10 @@ while cap.isOpened():
             print('face_ids mismatch with index! Training data might be outdated.')
             continue
 
+        frh.draw_rectangle(frame, face)
+
         if confidence > CONFIDENCE_THRESHOLD:
-            frh.draw_text(frame, face_ids[label] + ',' + "{:.2f}".format(confidence), x, y, (255,0,0))
+            frh.draw_text(frame, face_ids[label] + ',' + "{:.2f}%".format(confidence), x, y, (255,0,0))
 
     cv2.imshow('frame', frame)
     if cv2.waitKey(1) & 0xFF == ord('q'):
