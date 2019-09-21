@@ -1,4 +1,5 @@
 import cv2
+import math
 import numpy as np
 import os
 
@@ -22,17 +23,19 @@ def fetch_data(root_directory):
     face_ids = {}
     
     for path, subdirnames, filenames in os.walk(root_directory):
+        id = os.path.basename(path)
+
         for filename in filenames:
+            print(f'Reading: {filename}')
             if filename.startswith('.'): continue
             
-            id = os.path.basename(path)
             img_path = os.path.join(path, filename)
 
             img = cv2.imread(img_path)
             if img is None: continue
 
             gray, faces = detect_faces(img)
-            if len(faces) > 1 or len(faces) == 0: continue
+            if len(faces) != 1: continue
             
             if not id in face_ids:
                 face_ids[curr_id] = id
@@ -45,30 +48,21 @@ def fetch_data(root_directory):
             
     return face_data, face_ids
 
-def fetch_ids(root_directory):
-    curr_id = 0
-    face_ids = {}
-    
-    for path, subdirnames, filenames in os.walk(root_directory):
-        for filename in filenames:
-            if filename.startswith('.'): continue
-            
-            id = os.path.basename(path)
-            img_path = os.path.join(path, filename)
-
-            img = cv2.imread(img_path)
-            if img is None: continue
-
-            gray, faces = detect_faces(img)
-            if len(faces) > 1 or len(faces) == 0: continue
-            
-            if not id in face_ids:
-                face_ids[curr_id] = id
-                curr_id += 1
-            
-    return face_ids
-
 def train_data(face_data, face_id):
     recognizer = cv2.face.LBPHFaceRecognizer_create()
     recognizer.train(face_data, np.array(face_id))
     return recognizer
+
+def resize_by_area(img, max_area):
+    h,w,_ = img.shape
+    dim = w * h
+
+    # if dimension is greater than max_area, we resize it to that area
+    if dim > max_area:
+        val = max_area / dim
+        k = math.sqrt(val)
+        w = int(w * k)
+        h = int(h * k)
+        img = cv2.resize(img, (w,h))
+
+    return img

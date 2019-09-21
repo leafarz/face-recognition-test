@@ -1,14 +1,16 @@
 import cv2
 import os
+import json
 import numpy as np
 import util.face_recognition_helper as frh
 
-# Only below
+# Edit only below
 
-CONFIDENCE_THRESHOLD = 50
+CONFIDENCE_THRESHOLD = 30
 
-# Only above
+# Edit only above
 
+# read trained data
 if not os.path.exists('./data/train_data.yml'):
     print('train_data.yml doesn\'t exist!\nRun create-data.py and train-data.py to create and train data.')
     exit()
@@ -16,8 +18,11 @@ if not os.path.exists('./data/train_data.yml'):
 face_recognizer = cv2.face.LBPHFaceRecognizer_create()
 face_recognizer.read('./data/train_data.yml')
 
-face_ids = frh.fetch_ids('./data/images')
+# read data table
+with open('./data/data_table.json') as json_file:
+    face_ids = json.load(json_file)
 
+# start camera
 cap = cv2.VideoCapture(0)
 while cap.isOpened():
     ret, frame = cap.read()
@@ -36,7 +41,7 @@ while cap.isOpened():
         frh.draw_rectangle(frame, face)
 
         if confidence > CONFIDENCE_THRESHOLD:
-            frh.draw_text(frame, face_ids[label] + ',' + "{:.2f}%".format(confidence), x, y, (255,0,0))
+            frh.draw_text(frame, face_ids[str(label)] + ',' + "{:.2f}%".format(confidence), x, y, (255,0,0))
 
     cv2.imshow('frame', frame)
     if cv2.waitKey(1) & 0xFF == ord('q'):

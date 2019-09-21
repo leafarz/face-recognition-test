@@ -2,19 +2,20 @@ import cv2
 import os
 import util.face_recognition_helper as frh
 
-# Only below
+# Edit below only
 
 DIRECTORY_NAME = "test"
 
-# Only above
+# Edit above only
 
-image_dir = os.path.join(os.getcwd(), "./data/images")
+img_dir = os.path.join(os.getcwd(), "./data/images")
+face_dir = os.path.join(os.getcwd(), "./data/faces")
 
-# create working directory if it doe
-if not os.path.exists(image_dir):
-    os.mkdir(image_dir)
-    
-working_dir = os.path.join(image_dir, DIRECTORY_NAME)
+# create directories if it not found
+if not os.path.exists(img_dir): os.mkdir(img_dir)
+if not os.path.exists(face_dir): os.mkdir(face_dir)
+
+working_dir = os.path.join(face_dir, DIRECTORY_NAME)
 if not os.path.exists(working_dir):
     os.mkdir(working_dir)
 
@@ -43,6 +44,8 @@ while cap.isOpened():
 
         # create files when face is detected
         filename = os.path.join(working_dir, str(start_index) + '.jpg')
+
+        print(f'Creating to: {filename}')
         cv2.imwrite(filename, roi_gray)
         start_index += 1
 

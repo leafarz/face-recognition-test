@@ -16,9 +16,24 @@
 <br>`pip install -r requirements.txt`
 
 ## Usage
-1) Run `create-data.py`. This will try to recognize your face and will create images in the [DIRECTORY_NAME] in the script. Q to quit.
-2) Run `train-data.py` to train the images and create the data file.
-3) Run `face-recognition.py` to test.
+- Creating Images
+  - Run `create-data.py`
+  - This will try to recognize your face from camera and will create images in the `./data/faces/[DIRECTORY_NAME]` directory.
+  - DIRECTORY_NAME is found in the script.
+  - Q to quit.
+- Extracting Existing Images
+  - Run `extract-images.py`
+  - This will get faces from images in `./data/images/` and extract it to `./data/faces` directory. Refer to [Directories section](#sec_dir).
+- Train the Data
+  - Run `train-data.py` to train the images in the faces folder and create the trained data file.
+- Run the face recognition program
+  - Run `face-recognition.py` to test.
+  - Q to quit.
+
+<a name="sec_dir"></a>
+## Directories
+- Root directory of images `./data/images/[name_of_person]` (must be inside the folder with the identifier's name)
+- Root directory of created or extracted images to train: `./data/images/faces`
 
 ## Tools used
 - VSCode

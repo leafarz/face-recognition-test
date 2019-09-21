@@ -1,6 +1,8 @@
 # user defined
 data/images
+data/faces
 data/train_data.yml
+data/data_table.json
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
