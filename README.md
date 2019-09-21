@@ -12,9 +12,9 @@
 <br>`venv\Scripts\deactivate.bat` (to deactivate)
 - Install packages from requirements:
 <br>`pip install -r requirements.txt`
-- From root, run python scripts via `python [path_to_script]` command
 
 ## Usage
+- From root, run python scripts via `python [path_to_script]` command
 - Creating Images
   - Run `create-data.py`
   - This will try to recognize your face from camera and will create images in the `./data/faces/[DIRECTORY_NAME]` directory.
