@@ -12,8 +12,7 @@
 - Activate virtual environment:
 <br>`venv\Scripts\activate.bat`
 <br>`venv\Scripts\deactivate.bat` (to deactivate)
-- Install packages from requirements:
-<br>`pip install -r requirements.txt`
+- From root, run python scripts via `python [path_to_script]` command
 
 ## Usage
 - Creating Images
