@@ -1,5 +1,5 @@
 # face-recognition-test
-- Test project to create images, train and recognize faces in video.
+- Test project to create images, train and recognize faces in video using face and eye classifiers.
 
 ## Prerequisites
 - Python 3.7
@@ -17,12 +17,12 @@
 - From root, run python scripts via `python [path_to_script]` command
 - Creating Images
   - Run `create-data.py`
-  - This will try to recognize your face from camera and will create images in the `./data/faces/[DIRECTORY_NAME]` directory.
+  - This will try to capture your face and eyes from camera and will create images in the `./data/face_data/[DIRECTORY_NAME]` directory.
   - DIRECTORY_NAME is found in the script.
-  - Q to quit.
+  - R to record and Q to quit.
 - Extracting Existing Images
   - Run `extract-images.py`
-  - This will get faces from images in `./data/images/` and extract it to `./data/faces` directory. Refer to [Directories section](#sec_dir).
+  - This will get faces from images in `./data/images/` and extract it to `./data/face_data` directory. Refer to [Directories section](#sec_dir).
 - Train the Data
   - Run `train-data.py` to train the images in the faces folder and create the trained data file.
 - Run the face recognition program
@@ -32,7 +32,7 @@
 <a name="sec_dir"></a>
 ## Directories
 - Root directory of images `./data/images/[name_of_person]` (must be inside the folder with the identifier's name)
-- Root directory of created or extracted images to train: `./data/images/faces`
+- Root directory of created or extracted images to train: `./data/images/face_data`
 
 ## Tools used
 - VSCode

@@ -1,16 +1,20 @@
-import cv2
+import cv2, json, os
 import util.face_recognition_helper as frh
-import json
 
+ROOT_DIR = './data/face_data'
 
-face_data, face_ids = frh.fetch_data('./data/faces')
-ids = list(face_ids.keys())
+face_data, face_ids = frh.fetch_data(ROOT_DIR)
 
-if len(ids) > 0:
-    recognizer = frh.train_data(face_data, ids)
-    recognizer.save('./data/train_data.yml')
+with open('./data/training_data/list.txt', 'w') as f:
+    f.write(','.join(face_ids.keys()))
 
-    with open('./data/data_table.json', 'w') as outfile:
-        json.dump(face_ids, outfile)
-else:
-    print('./data/images is empty. Run create-data.py to create data.')
+for face_part in face_ids:
+    ids = list(face_ids[face_part].keys())
+    if len(ids) > 0:
+        recognizer = frh.train_data(face_data[face_part], ids)
+        recognizer.save(f'./data/training_data/train_{face_part}.yml')
+
+        with open(f'./data/training_data/table_{face_part}.json', 'w') as outfile:
+            json.dump(face_ids[face_part], outfile)
+    else:
+        print('Data is empty. Run extract-images.py to create data.')
