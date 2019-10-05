@@ -1,5 +1,5 @@
 import cv2, json, os
-import util.face_recognition_helper as frh
+from util import face_recognition_helper as frh
 
 ROOT_DIR = './data/face_data'
 

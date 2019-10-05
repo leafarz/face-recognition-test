@@ -1,6 +1,5 @@
 import cv2, os, json
-import numpy as np
-import util.face_recognition_helper as frh
+from util import face_recognition_helper as frh
 
 # Edit only below
 

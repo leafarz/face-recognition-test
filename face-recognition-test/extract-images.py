@@ -1,5 +1,5 @@
-import cv2, os, math
-import util.face_recognition_helper as frh
+import cv2, os
+from util import face_recognition_helper as frh
 
 # Edit only below
 THRESHOLD_AREA = 1024*1024

@@ -1,5 +1,5 @@
 import cv2, os
-import util.face_recognition_helper as frh
+from util import face_recognition_helper as frh
 
 # Edit below only
 
