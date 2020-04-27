@@ -1,24 +1,32 @@
-import cv2, os, json
+import json
+import os
+
+import cv2
+
 from util import face_recognition_helper as frh
 
 # Edit only below
-
 CONFIDENCE_THRESHOLD = 30
-
 # Edit only above
 
-with open('./data/training_data/list.txt', 'r') as f:
+
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+TRAINING_DATA_DIR = os.path.join(BASE_DIR, "../data/training_data")
+
+with open(os.path.join(TRAINING_DATA_DIR, "list.txt"), "r") as f:
     string = f.read()
 
 recognizers = {}
 face_ids = {}
-for face_part in string.split(','):
-    id_file = f'./data/training_data/table_{face_part}.json'
-    training_file = f'./data/training_data/train_{face_part}.yml'
+for face_part in string.split(","):
+    id_file = os.path.join(TRAINING_DATA_DIR, f"table_{face_part}.json")
+    training_file = os.path.join(TRAINING_DATA_DIR, f"train_{face_part}.yml")
 
     # read trained data
     if not os.path.exists(training_file):
-        print(f'{training_file} doesn\'t exist!\nRun create-data.py and train-data.py to create and train data.')
+        print(
+            f"{training_file} doesn't exist!\nRun create-data.py and train-data.py to create and train data."
+        )
         exit()
 
     recognizers[face_part] = cv2.face.LBPHFaceRecognizer_create()
@@ -37,22 +45,28 @@ while cap.isOpened():
 
     for face_part in face_data:
         for data in face_data[face_part]:
-            (x,y,w,h) = data
-            roi_gray = gray[y:y+h, x:x+w]
+            (x, y, w, h) = data
+            roi_gray = gray[y : y + h, x : x + w]
             label, confidence = recognizers[face_part].predict(roi_gray)
             confidence = 100 - abs(100 - confidence)
-            
-            if(label > len(face_ids[face_part])):
-                print('face_ids mismatch with index! Training data might be outdated.')
+
+            if label > len(face_ids[face_part]):
+                print("face_ids mismatch with index! Training data might be outdated.")
                 continue
 
             frh.draw_rectangle(frame, data)
 
             if confidence > CONFIDENCE_THRESHOLD:
-                frh.draw_text(frame, face_ids[face_part][str(label)] + ',' + "{:.2f}%".format(confidence), x, y, (255,0,0))
+                frh.draw_text(
+                    frame,
+                    f'{face_ids[face_part][str(label)]},{"{:.2f}%".format(confidence)}',
+                    x,
+                    y,
+                    (255, 0, 0),
+                )
 
-    cv2.imshow('frame', frame)
-    if cv2.waitKey(1) & 0xFF == ord('q'):
+    cv2.imshow("frame", frame)
+    if cv2.waitKey(1) & 0xFF == ord("q"):
         break
 
 cap.release()
