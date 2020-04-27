@@ -5,26 +5,38 @@
 - Python 3.7
 
 ## Install (Windows)
-- Create virtual environment:
-<br>`python -m venv venv`
-- Activate virtual environment:
-<br>`venv\Scripts\activate.bat`
-<br>`venv\Scripts\deactivate.bat` (to deactivate)
-- Install packages from requirements:
-<br>`pip install -r requirements.txt`
+1. Create virtual environment:
+    ```
+    python -m venv venv
+    ```
+2. Activate virtual environment:
+    ```
+    venv\Scripts\activate
+    venv\Scripts\deactivate :: to deactivate
+    ```
+3. Install packages from requirements:
+    ```
+    pip install -r requirements.txt
+    ```
 
 ## Usage
-- From root, run python scripts via `python [path_to_script]` command
-- Creating Images
-  - Run `create-data.py`
+- From `face-recognition-test` directory
+- Creating image data
+  - Create data by running command
+    ```
+    `create-data.py`
+    ```
   - This will try to capture your face and eyes from camera and will create images in the `./data/face_data/[DIRECTORY_NAME]` directory.
   - DIRECTORY_NAME is found in the script.
   - R to record and Q to quit.
-- Extracting Existing Images
+
+- Extracting image data from existing images
   - Run `extract-images.py`
   - This will get faces from images in `./data/images/` and extract it to `./data/face_data` directory. Refer to [Directories section](#sec_dir).
-- Train the Data
+
+- Train the image data
   - Run `train-data.py` to train the images in the faces folder and create the trained data file.
+
 - Run the face recognition program
   - Run `face-recognition.py` to test.
   - Q to quit.

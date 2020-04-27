@@ -5,7 +5,7 @@ import cv2
 from util import face_recognition_helper as frh
 
 # Edit below only
-DIRECTORY_NAME = "raf"
+DIRECTORY_NAME = "Name"
 # Edit above only
 
 
