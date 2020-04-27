@@ -21,25 +21,29 @@
 
 ## Usage
 - From `face-recognition-test` directory
-- Creating image data
-  - Create data by running command
-    ```
-    `create-data.py`
-    ```
-  - This will try to capture your face and eyes from camera and will create images in the `./data/face_data/[DIRECTORY_NAME]` directory.
-  - DIRECTORY_NAME is found in the script.
-  - R to record and Q to quit.
+- Creating image data can be done in 2 ways:
+    1. Create image data via recording
+        - Run command
+          ```
+          `create-data.py`
+          ```
+        - This will try to capture your face and eyes from camera and will create images in the `./data/face_data/[DIRECTORY_NAME]` directory.
+        - DIRECTORY_NAME is found in the script.
+        - R to record and Q to quit.
 
-- Extracting image data from existing images
-  - Run `extract-images.py`
-  - This will get faces from images in `./data/images/` and extract it to `./data/face_data` directory. Refer to [Directories section](#sec_dir).
+    2. Extract image data from existing images
+        - Run command
+          ```
+          extract-images.py
+          ```
+        - This will get faces from images in `./data/images/` and extract it to `./data/face_data` directory. Refer to [Directories section](#sec_dir).
 
 - Train the image data
-  - Run `train-data.py` to train the images in the faces folder and create the trained data file.
+    - Run `train-data.py` to train the images in the faces folder and create the trained data file.
 
 - Run the face recognition program
-  - Run `face-recognition.py` to test.
-  - Q to quit.
+    - Run `face-recognition.py` to test.
+    - Q to quit.
 
 <a name="sec_dir"></a>
 ## Directories
