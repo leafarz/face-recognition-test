@@ -1,6 +1,6 @@
 # face-recognition-test
 
-- Test project to create images, train and recognize faces in video using face and eye classifiers.
+- Test project to create images, train and recognize faces in video using Haar Cascade face and eye classifiers.
 
 ## Prerequisites
 
